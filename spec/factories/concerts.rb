@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :concert do
-    title { "MyString" }
-    description { "MyText" }
+    sequence(:title) { |n| "Live Concert Nº #{n}" }
+    sequence(:description) { |n| "Description of the Music Show Nº #{n}" }
   end
 end
