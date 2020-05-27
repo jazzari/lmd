@@ -1,7 +1,7 @@
 class ConcertsController < ApplicationController 
 
 	def index
-		concerts = Concert.all
+		concerts = Concert.recent
 		render json: serializer.new(concerts) 
 	end
 

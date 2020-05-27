@@ -22,4 +22,16 @@ RSpec.describe Concert, type: :model do
 
    end
 
+   describe '.recent' do 
+
+   	it 'should list recent concert first' do
+   	    old_concert = create :concert 
+   	    newer_concert = create :concert 
+   	    expect(described_class.recent).to eq([ newer_concert, old_concert ])
+   	    old_concert.update_column :created_at, Time.now
+   	    expect(described_class.recent).to eq([ old_concert, newer_concert ])
+   	end
+
+   end
+
 end

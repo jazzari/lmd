@@ -12,12 +12,20 @@ describe ConcertsController do
 
 		it 'should return proper json' do 
 			concerts = create_list :concert, 2
-			subject
-			concerts.each_with_index do |concert, index|
+			subject 
+			Concert.recent.each_with_index do |concert, index|
               expect(json_data[index]['attributes']).to eq({ 
               	"title" => concert.title,
                 "description" => concert.description }) 
             end
+		end
+
+		it 'should return concerts in the proper order' do 
+			old_concert = create :concert 
+			newer_concert = create :concert 
+			subject
+			expect(json_data.first['id']).to eq(newer_concert.id.to_s)
+			expect(json_data.last['id']).to eq(old_concert.id.to_s)
 		end
 
 	end
